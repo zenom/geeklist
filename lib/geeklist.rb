@@ -1,6 +1,4 @@
-#require 'faraday'
-#require 'json'
-
+require 'oauth'
 
 module Geeklist
 
@@ -15,4 +13,5 @@ module Geeklist
   end
 
   autoload :Client, "geeklist/client"
+  autoload :Helpers, "geeklist/helpers"
 end

@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  #s.add_dependency 'faraday', '~> 0.7'
-  #s.add_dependency 'json'
+  s.add_dependency 'oauth', '0.4.5'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'fivemat'
   s.add_development_dependency 'awesome_print'
+  s.add_development_dependency 'purdytest'
 end
