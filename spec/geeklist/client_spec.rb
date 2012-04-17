@@ -13,6 +13,9 @@ describe Geeklist::Client do
       config.token = '1234'
       config.secret = '1234'
     end
+
+    Geeklist.token.must_equal '1234'
+    Geeklist.secret.must_equal '1234'
   end
 
 
