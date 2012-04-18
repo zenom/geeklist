@@ -86,7 +86,11 @@ describe Geeklist::Client do
       end
 
       it 'should  return a valid access token' do
-        ap access_token
+        access_token.must_be_instance_of Array
+        access_token[0].must_be_kind_of String
+        access_token[1].must_be_kind_of String
+
+        assert_requested(:post, 'http://sandbox-api.geekli.st/v1/oauth/access_token', :times => 1)
       end
 
       after do
@@ -104,6 +108,19 @@ describe Geeklist::Client do
         auth_token.must_be_instance_of Array
         auth_token[0].must_be_kind_of String
         auth_token[1].must_be_kind_of String
+      end
+    end
+
+
+    describe '#access-token' do
+      let(:access_token) do
+        client.authorize_from_access('dummy-token', 'dummy-secret')
+        client.access_token
+      end
+
+      it 'should return a valid access token' do
+        access_token.must_be_instance_of OAuth::AccessToken
+        access_token.token.must_be_kind_of String
       end
     end
 
