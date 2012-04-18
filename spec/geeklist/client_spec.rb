@@ -54,11 +54,16 @@ describe Geeklist::Client do
       end
 
       it 'should have a valid request token' do
-        #ap client.request_token
-        ap client
-        ap client.consumer
-        ap client.request_token
-        #skip "Need to build out request stuff."
+        request_token = client.request_token
+        request_token.must_be_instance_of OAuth::RequestToken
+        request_token.authorize_url.must_include 'geekli.st/oauth/authorize?oauth_token'
+        
+        # only 1 request was made via webmock
+        assert_requested(:post, 'http://sandbox-api.geekli.st/v1/oauth/request_token', :times => 1)
+      end
+
+      it "should work with a callback url as well" do
+        skip('implement this')
       end
 
       after do
@@ -66,6 +71,28 @@ describe Geeklist::Client do
       end
     end # end request
 
+
+    describe '#authorize_from_request' do
+      let(:access_token) do
+        client.authorize_from_request('dummy-token', 'dummy-secret', 'dummy-pin')
+      end
+
+      it 'should  return a valid access token' do
+        skip('implement this')
+      end
+    end
+
+    describe '#authorize_from_access' do
+      let(:auth_token) do
+        client.authorize_from_access('dummy-token' ,'dummy-secret')
+      end
+
+      it 'should return a valid auth token' do
+        auth_token.must_be_instance_of Array
+        auth_token[0].must_be_kind_of String
+        auth_token[1].must_be_kind_of String
+      end
+    end
 
   end # end oauth
 
