@@ -3,6 +3,5 @@
 .bundle
 Gemfile.lock
 pkg/*
-
 my-info.txt
-spec/fixtures/
+spec/fixtures/*
