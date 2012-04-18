@@ -4,7 +4,9 @@ require 'ap'
 describe Geeklist::Client do
 
   let(:client) do
-    Geeklist::Client.new('1234', '1234')
+    key     = ENV['GEEKLIST_CONSUMER_KEY'] || '1234'
+    secret  = ENV['GEEKLIST_CONSUMER_SECRET'] || '1234' 
+    Geeklist::Client.new(key, secret)
   end
 
   it 'should be able to set token and secret outside a block' do
@@ -34,23 +36,36 @@ describe Geeklist::Client do
         client.consumer
       end
 
+
       it 'should have a consumer' do
         consumer.wont_be_nil
-        consumer.site.must_equal 'http://geekli.st' 
-        consumer.request_token_url.must_equal 'http://geekli.st/v1/oauth/request_token'
-        consumer.access_token_url.must_equal 'http://geekli.st/v1/oauth/access_token'
-        consumer.authorize_url.must_equal 'http://geekli.st/oauth/authorize' 
+        consumer.site.must_equal 'http://sandbox-api.geekli.st' 
+        consumer.request_token_url.must_equal 'http://sandbox-api.geekli.st/v1/oauth/request_token'
+        consumer.access_token_url.must_equal 'http://sandbox-api.geekli.st/v1/oauth/access_token'
+        consumer.authorize_url.must_equal 'http://sandbox.geekli.st/oauth/authorize' 
       end
 
     end # end #consumer
 
 
     describe '#request' do
+      before do
+        VCR.insert_cassette(__name__)
+      end
+
       it 'should have a valid request token' do
         #ap client.request_token
-        skip "Need to build out request stuff."
+        ap client
+        ap client.consumer
+        ap client.request_token
+        #skip "Need to build out request stuff."
       end
-    end
+
+      after do
+        VCR.eject_cassette
+      end
+    end # end request
+
 
   end # end oauth
 

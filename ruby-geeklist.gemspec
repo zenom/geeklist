@@ -19,8 +19,10 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'oauth', '0.4.5'
-  s.add_development_dependency 'minitest'
-  s.add_development_dependency 'fivemat'
-  s.add_development_dependency 'awesome_print'
-  s.add_development_dependency 'purdytest'
+  s.add_development_dependency 'minitest', '2.12.1'
+  s.add_development_dependency 'fivemat', '1.0.0'
+  s.add_development_dependency 'awesome_print', '1.0.2'
+  s.add_development_dependency 'purdytest', '1.0.0'
+  s.add_development_dependency 'vcr', '2.0.1'
+  s.add_development_dependency 'webmock', '1.8.6'
 end
