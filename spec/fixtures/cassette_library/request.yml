@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://sandbox-api.geekli.st/v1/oauth/request_token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - OAuth gem v0.4.5
+      Content-Length:
+      - '0'
+      Authorization:
+      - OAuth oauth_body_hash="2jmj7l5rSw0yVb%2FvlWAYkK%2FYBwk%3D", oauth_callback="oob",
+        oauth_consumer_key="S5zQkdw1b1O0ZZOzH_EeYCfpV24", oauth_nonce="LQpHZhQ8gU27veAkzBfKrFlsAFiMeWhw4WQ8Lvddew",
+        oauth_signature="D6uBhnuuIioZhS0wifusaCZqZUE%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1334785758", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Content-Type:
+      - text/plain
+      Connection:
+      - keep-alive
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: oauth_token=o78mvhHr56ktmx-A3Brbh3ezuIs&oauth_token_secret=ZN9cXhgv5KMOpkcH_5HTXj0wcox-Y65JxWuGEaqAvLM&oauth_callback_confirmed=true
+    http_version: !!null 
+  recorded_at: Wed, 18 Apr 2012 21:49:19 GMT
+recorded_with: VCR 2.0.1

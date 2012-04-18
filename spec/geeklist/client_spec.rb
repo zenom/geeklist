@@ -50,11 +50,14 @@ describe Geeklist::Client do
 
     describe '#request' do
       before do
-        VCR.insert_cassette(__name__)
+        VCR.insert_cassette('request')
       end
 
       it 'should have a valid request token' do
         request_token = client.request_token
+        #puts "token: #{request_token.token}  -- secret: #{request_token.secret}"
+        #puts "auth_url: #{request_token.authorize_url}"
+        
         request_token.must_be_instance_of OAuth::RequestToken
         request_token.authorize_url.must_include 'geekli.st/oauth/authorize?oauth_token'
         
@@ -73,13 +76,23 @@ describe Geeklist::Client do
 
 
     describe '#authorize_from_request' do
+
+      before do
+        VCR.insert_cassette('authorize_from_request')
+      end
+
       let(:access_token) do
-        client.authorize_from_request('dummy-token', 'dummy-secret', 'dummy-pin')
+        client.authorize_from_request('o78mvhHr56ktmx-A3Brbh3ezuIs', 'ZN9cXhgv5KMOpkcH_5HTXj0wcox-Y65JxWuGEaqAvLM', '5953675')
       end
 
       it 'should  return a valid access token' do
-        skip('implement this')
+        ap access_token
       end
+
+      after do
+        VCR.eject_cassette
+      end
+
     end
 
     describe '#authorize_from_access' do

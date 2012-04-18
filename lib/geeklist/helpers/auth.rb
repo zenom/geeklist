@@ -28,11 +28,14 @@ module Geeklist
       end
 
       def access_token
-        #@access_token ||= ::OAuth::AccessToken.new(consumer, 
+        @access_token ||= ::OAuth::AccessToken.new(consumer, @auth_token, @auth_secret)
       end
 
       # authorize from a web request
-      def authorize_from_request
+      def authorize_from_request(request_token, request_secret, auth_pin)
+        request_token = ::OAuth::RequestToken.new(consumer, request_token, request_secret)
+        access_token  = request_token.get_access_token(:oauth_verifier => auth_pin) 
+        @auth_token, @auth_secret = access_token.token, access_token.secret
       end
 
       # authorize from access
